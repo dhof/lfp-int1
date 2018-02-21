@@ -1,1 +1,0 @@
-const Movies = require('./movieModel')

@@ -1,13 +1,5 @@
 const csv = require('fast-csv')
-const Movies = require('./movieModel')
-
-// const movies = [
-// 	{
-// 		id: 1,
-// 		name: 'Toy Story (1995)',
-// 		genre: ['Adventure', 'Animation', 'Children', 'Comedy', 'Fantasy']
-// 	}
-// ]
+const Movies = require('../models/movieModel')
 
 const populateMovies = () => {
 	console.log('POPULATED MOVIES')
@@ -19,11 +11,12 @@ const populateMovies = () => {
 
 			csv
 				.fromPath('./movies.csv', {headers: true, ignoreEmpty: true})
-				.on('data', function(data){
+				.on('data', function(data){						
 					addMovies.push(new Movies({
 						id: data['movie id'],
 						title: data.title,
-						genres: data.genres
+						genres: data.genres.split("|"),
+						year: data.title.slice(-5, -1)
 					}).save())
 				})
 				.on('end', function(){
