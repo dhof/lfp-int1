@@ -21,7 +21,7 @@ app.use(bodyParser.json())
 app.use(logger('dev'))
 
 // routes
-app.get('/', (req, res) => res.send('Welcome!'))
+app.get('/', (req, res) => res.send('Welcome to the movies API!'))
 app.get('/movies', movieController.movies)
 app.get('/moviesbygenre', movieController.moviesByGenre)
 app.get('/genres', movieController.genres)
