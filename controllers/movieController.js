@@ -23,7 +23,7 @@ module.exports = {
 				console.log(err)
 				res.send(err)
 			} else {
-				console.log(movies.length, genre, 'sent')
+				console.log(movies.length, genre, ' movies sent')
 				res.send(movies)
 			}
 		})
