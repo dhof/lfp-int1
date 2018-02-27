@@ -21,7 +21,9 @@ Axios was used in this project but you may use any tool you like to perform the 
 |----------------------|-----------------------------------------------|
 | /movies              | get all movies		                           |
 | /moviesbygenre       | get movies by genre                           |
+| /mostmoviesbyear     | movies ordered by most per year               |
 | /genres              | get all genres                                |
+| /genresbymostmovies  | genres ordered by majority number of movies   |
 | /create 			   | add a movie to the database                   |
 | /update              | edit a movie in the database                  |
 | /remove              | remove a movie from the database              |

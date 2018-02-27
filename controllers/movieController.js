@@ -28,9 +28,50 @@ module.exports = {
 			}
 		})
 	},
+	// show all movies ordered by most per year
+	mostMoviesByYear(req, res) {
+		let aggregate = Movies.aggregate([
+			{ $group: {
+		 		_id: "$year", 
+		 		count: { $sum: 1 }, 
+		 		movies: { $push: { 
+		 			id: "$id", 
+		 			title: "$title", 
+		 			genres: "$genres", 
+		 			year: "$year"
+		 		} } } },
+		 	{ $sort: { count: -1 } }	
+		 ],
+		(err, movies) => {
+			if (err) {
+				console.log(err)
+				res.send(err)
+			} else {
+				res.send(movies)
+			}
+		})
+	},
 	// show all genre types
 	genres(req, res) {
 		let find = Movies.find().distinct("genres", (err, genres) => {
+			if (err) {
+				console.log(err)
+				res.send(err)
+			} else {
+				res.send(genres)
+			}
+		})
+	},
+	// show genres ordered by most movies
+	genresByMostMovies(req, res) {
+		let aggregate = Movies.aggregate([
+			{ $unwind: "$genres" }, 
+			{ $group: { 
+				_id: "$genres", 
+				count: { $sum: 1 } } },
+			{ $sort: { count: -1 } } 
+		],
+		(err, genres) => {
 			if (err) {
 				console.log(err)
 				res.send(err)
